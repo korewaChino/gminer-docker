@@ -1,10 +1,13 @@
 services:
   gminer:
+    image: ghcr.io/korewachino/gminer:latest
     build:
       context: .
       dockerfile: Dockerfile
     runtime: nvidia
-    command: --algo 144_5 -s stratum+ssl://zhash.auto.nicehash.com:443 -u 34qDhCVPG7wHXNi9MrYAEKcwg7SGvngdRy.ryou --pass x --pers nicehash
+    env_file:
+      - .env
+    command: $ARGS
 
 
 

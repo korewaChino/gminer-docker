@@ -1,20 +1,20 @@
 FROM ubuntu:20.04 AS builder
 
 WORKDIR /tmp
-
 ARG GMINER_VERSION="3.44"
 ARG GMINER_FILENAME="gminer_3_44_linux64.tar.xz"
 
 RUN mkdir gminer &&\
     apt update && apt install tar wget xz-utils -y
 
-RUN wget https://github.com/develsoftware/GMinerRelease/releases/download/${GMINER_VERSION}/${GMINER_FILENAME} && \
+    RUN wget https://github.com/develsoftware/GMinerRelease/releases/download/${GMINER_VERSION}/${GMINER_FILENAME} && \
     tar xf ${GMINER_FILENAME} -C gminer
 
 
 FROM nvidia/cuda:12.4.1-base-ubuntu22.04
+LABEL org.opencontainers.image.source = "https://github.com/dockminer/gminer"
 
-LABEL maintainer="Dockminer"
+LABEL maintainer="cappy@cappuchino.xyz"
 
 LABEL org.opencontainers.image.source https://github.com/dockminer/gminer
 
